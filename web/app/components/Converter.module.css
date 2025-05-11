@@ -1,0 +1,109 @@
+.form {
+  margin-top: 2em;
+}
+
+.inputField {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  border-radius: 0.75em;
+  border: 2px solid white;
+}
+
+.input {
+  width: 100%;
+  padding: 1em;
+  color: var(--ci-dark-text);
+  border: 0;
+  background-color: transparent;
+  border-radius: 0.75em;
+}
+
+.error {
+  border-color: red;
+}
+
+.submit {
+  background-color: var(--ci-main);
+  margin: 3px;
+  padding: 1em;
+  border-radius: 0.75em;
+  transition: background-color 0.25s;
+}
+
+.submit:hover,
+.submit:active {
+  background-color: var(--ci-light-main);
+}
+
+.result {
+  margin-top: 1em;
+}
+
+.wrapper {
+  width: 100%;
+  background-color: white;
+  border-radius: 0.75em;
+  padding: 1em;
+  color: var(--ci-dark-text);
+}
+
+.logo {
+  fill: var(--ci-main) !important;
+  font-size: 3em;
+}
+
+.logoRed {
+  font-size: 3em;
+  fill: red !important;
+}
+
+.animate {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.action {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.actionButton {
+  padding: 0.35em;
+  width: 2.5em;
+  height: 2.5em;
+  margin-right: 1em;
+  background-color: var(--ci-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75em;
+  transition: background-color 0.25s;
+  margin-right: 1.5em;
+}
+
+.actionButton:last-child {
+  margin-right: 0;
+}
+
+.actionButton:hover {
+  background-color: var(--ci-light-main);
+}
+
+.actionIcon {
+  font-size: 1.5em;
+  fill: var(--ci-text) !important;
+}

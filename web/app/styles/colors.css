@@ -1,0 +1,9 @@
+:root {
+  --ci-main: hsl(258, 90%, 66%);
+  --ci-light-main: hsl(252, 95%, 85%);
+  --ci-dark-main: hsl(240, 22%, 15%);
+  --ci-text: hsl(0, 0%, 100%);
+  --ci-dark-text: hsl(0, 1%, 25%);
+  --ci-light-text: hsl(252, 5%, 82%);
+  --ci-placeholder: hsl(0, 0%, 49%);
+}

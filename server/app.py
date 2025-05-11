@@ -1,13 +1,19 @@
 import re
 from bs4 import BeautifulSoup
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify, request, send_from_directory
+from flask_cors import CORS
 import requests
 
-from server.content import get_html, get_text, get_final_url
-from server.utils import is_valid_url
+from src.content import get_final_url, get_html, get_text
+from src.utils import is_valid_url
 
-app: Flask = Flask(__name__)
+
+# app: Flask = Flask(__name__)
 api_v1: Blueprint = Blueprint("api_v1", __name__, url_prefix="/api/v1")
+
+
+app = Flask(__name__, static_folder="web/build", static_url_path="")
+CORS(app)
 
 
 @api_v1.route("/test", methods=["GET"])

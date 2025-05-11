@@ -2,7 +2,7 @@ import re
 from bs4 import BeautifulSoup
 import requests
 
-from server.utils import get_clean_url
+from src.utils import get_clean_url
 
 
 def get_final_url(raw_url):

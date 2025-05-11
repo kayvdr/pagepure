@@ -1,9 +1,18 @@
 services:
   server:
-    build: .
-    volumes:
-      - .:/app
+    build: ./server
     ports:
-      - "9000:5000"
-    env_file:
-      - .env
+      - "9001:5000"
+    volumes:
+      - ./server:/app
+    environment:
+      - FLASK_ENV=development
+
+  web:
+    build: ./web
+    ports:
+      - "9000:3000"
+    volumes:
+      - ./web:/web
+    working_dir: /app
+    command: sh -c "npm install && npm run build && npm run start"

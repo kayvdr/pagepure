@@ -1,0 +1,18 @@
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 4em;
+  }
+}
+
+.textPurple {
+  color: var(--ci-main);
+}

@@ -1,0 +1,65 @@
+@import "./colors.css";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  font-family: "Gugi", sans-serif;
+  color: var(--ci-text);
+  font-size: 1em;
+  background-color: var(--ci-dark-main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 1em;
+}
+
+a {
+  color: var(--blue-48);
+  text-decoration: none;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+input,
+select,
+button,
+textarea {
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
