@@ -27,16 +27,22 @@ def get_clean_tags(soup):
     ]
     allowed_tags = ["h1", "h2", "h3", "h4", "p", "ul", "ol", "code"]
 
+    # Priorität: article > main > body
+    content_root = soup.find("article") or soup.find("main") or soup
+
+    # Erstelle neuen Soup nur aus dem relevanten Bereich
+    scoped_soup = BeautifulSoup(str(content_root), "html.parser")
+
     # remove unnecessary tags recursive
-    for tag in soup(forbidden_tags):
+    for tag in scoped_soup(forbidden_tags):
         tag.decompose()
 
     # remove all attibutes
-    for tag in soup.find_all(True):
+    for tag in scoped_soup.find_all(True):
         tag.attrs = {}  # type: ignore
 
     # combine string array
-    return "".join(str(el) for el in soup.find_all(allowed_tags))
+    return "".join(str(el) for el in scoped_soup.find_all(allowed_tags))
 
 
 def get_html(soup: BeautifulSoup):
