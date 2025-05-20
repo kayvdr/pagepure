@@ -44,8 +44,9 @@ export const links: LinksFunction = () => [
     rel: "manifest",
     href: "/site.webmanifest",
   },
-  { rel: "stylesheet", href: "/app/styles/global.css" },
 ];
+
+import "/app/styles/global.css";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
