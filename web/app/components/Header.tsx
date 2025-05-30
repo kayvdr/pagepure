@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import classNames from "classnames";
 import { useState } from "react";
 import styles from "./Header.module.css";
@@ -9,9 +10,9 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <a href="/" className={styles.logo}>
+      <Link to="/" className={styles.logo}>
         <Icon glyph={SvgLogo} className={styles.logoIcon} /> Pagepure
-      </a>
+      </Link>
       <nav className={styles.nav}>
         <button
           className={classNames(styles.hamburger, {
@@ -27,14 +28,14 @@ const Header = () => {
           className={classNames(styles.menu, { [styles.menuOpen]: menuOpen })}
         >
           <li className={styles.item}>
-            <a href="" className={styles.itemLink}>
+            <Link to="/" className={styles.itemLink}>
               Home
-            </a>
+            </Link>
           </li>
           <li className={styles.item}>
-            <a href="" className={styles.itemLink}>
+            <Link to="/faq" className={styles.itemLink}>
               FAQ
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

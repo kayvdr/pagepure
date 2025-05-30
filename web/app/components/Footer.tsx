@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import styles from "./Footer.module.css";
 import SvgGithub from "./icons/Github";
 import SvgInstagram from "./icons/Instagram";
@@ -16,12 +17,16 @@ const Footer = () => (
           <h3 className={styles.title}>Links</h3>
           <ul className={styles.list}>
             <li className={styles.item}>
-              <a href="" className={styles.itemlink}>
+              <Link to="/about" className={styles.itemlink}>
                 About
-              </a>
+              </Link>
             </li>
             <li className={styles.item}>
-              <a href="" className={styles.itemlink}>
+              <a
+                href="https://www.kayvdr.com"
+                className={styles.itemlink}
+                target="_blank"
+              >
                 kayvdr.com
               </a>
             </li>
@@ -30,22 +35,34 @@ const Footer = () => (
         <div>
           <h3 className={styles.title}>Social Media</h3>
           <div className={styles.social}>
-            <a href="" className={styles.socialLink}>
+            <a
+              href="https://www.instagram.com/kaycodes_/"
+              className={styles.socialLink}
+              target="_blank"
+            >
               <Icon glyph={SvgInstagram} className={styles.socialIcon} />
             </a>
-            <a href="" className={styles.socialLink}>
+            <a
+              href="https://github.com/kayvdr"
+              className={styles.socialLink}
+              target="_blank"
+            >
               <Icon glyph={SvgGithub} className={styles.socialIcon} />
             </a>
-            <a href="" className={styles.socialLink}>
+            <a
+              href="https://www.linkedin.com/in/kay-vieider-b8a977276"
+              className={styles.socialLink}
+              target="_blank"
+            >
               <Icon glyph={SvgLinkedIn} className={styles.socialIcon} />
             </a>
           </div>
         </div>
       </div>
       <p className={styles.copyright}>
-        &copy; 2025 Pagepure ltd. Alle Rechte vorbehalten.{" "}
-        <a href="">Terms of Use</a> <a href="">Privacy</a>
-        Policy
+        &copy; 2025 Pagepure ltd. All rights reserved.{" "}
+        <Link to="/terms">Terms of Use</Link>{" "}
+        <Link to="/privacy">Privacy Policy</Link>
       </p>
     </div>
   </footer>

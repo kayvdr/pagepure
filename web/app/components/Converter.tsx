@@ -137,18 +137,36 @@ const Converter = () => {
           {data && !loading && !error.fetch && (
             <>
               <div className={styles.action}>
-                <button className={styles.actionButton}>
+                <button
+                  className={styles.actionButton}
+                  onClick={async () =>
+                    await navigator.clipboard.writeText(data.content.plain)
+                  }
+                >
                   <Icon glyph={SvgCopy} className={styles.actionIcon} />
+                  Copy
                 </button>
-                <button className={styles.actionButton}>
+                <button
+                  className={styles.actionButton}
+                  onClick={async () => {
+                    // await navigator.share({
+                    //   text: data.content.,
+                    // });
+                  }}
+                >
                   <Icon glyph={SvgShare} className={styles.actionIcon} />
+                  Share
                 </button>
                 <button className={styles.actionButton}>
                   <Icon glyph={SvgLink} className={styles.actionIcon} />
+                  Link
                 </button>
               </div>
               {/* TODO: Make this better with library */}
-              <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
+              <div
+                className={styles.content}
+                dangerouslySetInnerHTML={{ __html: data.content.html }}
+              />
             </>
           )}
         </div>
