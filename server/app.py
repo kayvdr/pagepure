@@ -21,10 +21,9 @@ def getTest():
     return jsonify({"running": 1}), 200
 
 
-@api_v1.route("/content", methods=["POST"])
+@api_v1.route("/content", methods=["GET"])
 def getExtractedContent():
-    data = request.get_json()
-    raw_url: str = data.get("url")
+    raw_url = request.args.get("url")
 
     if not raw_url:
         return jsonify({"error": "Missing 'url' field"}), 400
