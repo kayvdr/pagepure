@@ -50,13 +50,10 @@ const Converter = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:9001/api/v1/content", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url }),
-    });
+    const newURL = new URL(`${import.meta.env.VITE_API_URL}/api/v1/content`);
+    newURL.searchParams.append("url", url);
+
+    const response = await fetch(newURL);
 
     if (!response.ok) {
       console.error(`HTTP error! Status: ${response.status}`);

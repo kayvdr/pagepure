@@ -1,14 +1,17 @@
 services:
   server:
+    container_name: pagepure-server
     build: ./server
     ports:
-      - "9001:5000"
+      - "9001:9001"
     volumes:
       - ./server:/app
-    environment:
-      - FLASK_ENV=development
+    command: sh -c "npm install && npm run build && npm start"
+    env_file:
+      - server/.env
 
   web:
+    container_name: pagepure-web
     build: ./web
     ports:
       - "9000:3000"
@@ -16,3 +19,5 @@ services:
       - ./web:/web
     working_dir: /app
     command: sh -c "npm install && npm run build && npm run start"
+    env_file:
+      - web/.env
