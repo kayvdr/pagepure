@@ -61,24 +61,35 @@ export const extractContent = async (url: string) => {
     contentDoc.querySelectorAll(tag).forEach((el) => el.remove());
   });
 
+  // Schlüsselwörter, die im Tag-Namen enthalten sein dürfen, um ihn zu entfernen
+  const forbiddenTagKeywords = ["header", "footer", "sidebar", "widget"];
+
+  // Entferne alle Tags, deren Name eines der Keywords enthält
+  contentDoc.querySelectorAll("*").forEach((el) => {
+    const tagName = el.tagName.toLowerCase();
+    if (forbiddenTagKeywords.some((keyword) => tagName.includes(keyword))) {
+      el.remove();
+    }
+  });
+
   // Alle Attribute entfernen
   contentDoc.querySelectorAll("*").forEach((el) => {
     [...el.attributes].forEach((attr) => el.removeAttribute(attr.name));
   });
 
-  // Nur erlaubte Tags als HTML extrahieren
-  // const allowed = ["h1", "h2", "h3", "h4", "p", "ul", "ol", "code"];
-  // const htmlContent = allowed
-  //   .flatMap((tag) =>
-  //     [...contentDoc.querySelectorAll(tag)].map((el) => el.outerHTML)
-  //   )
-  //   .join("");
+  const result = contentDoc.toString();
+
+  const plainText = result
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\n+/g, "\n")
+    .trim();
 
   return {
     meta: { title: document.title, charset },
     content: {
-      html: contentDoc.toString(),
-      plain: contentDoc.body.textContent,
+      html: result,
+      plain: plainText,
     },
   };
 };
