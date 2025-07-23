@@ -32,7 +32,7 @@ const isURL = (url: string) => {
 };
 
 const Converter = () => {
-  const [url, setUrl] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState("");
   const [data, setData] = useState<Data | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ input: boolean; fetch: boolean }>({
@@ -40,18 +40,25 @@ const Converter = () => {
     fetch: false,
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setLoading(true);
 
-    if (!url || !isURL(url)) {
+    if (!value || !isURL(value)) {
       setError({ ...error, input: true });
       setLoading(false);
       return;
     }
 
     const newURL = new URL(`${import.meta.env.VITE_API_URL}/api/v1/content`);
-    newURL.searchParams.append("url", url);
+    newURL.searchParams.append("url", value);
+
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("value", value);
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}?${searchParams.toString()}`
+    );
 
     const response = await fetch(newURL);
 
@@ -74,12 +81,18 @@ const Converter = () => {
         input: false,
         fetch: false,
       }),
-    [url]
+    [value]
   );
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const rawValue = searchParams.get("value");
+    rawValue && setValue(rawValue);
+  }, []);
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.form}>
         <div
           className={classNames(styles.inputField, {
             [styles.error]: error.input,
@@ -89,13 +102,18 @@ const Converter = () => {
             type="text"
             className={styles.input}
             placeholder="Bsp: https://www.news.com/article/this-is-a-news-article"
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
           />
-          <button type="submit" className={styles.submit}>
+          <button
+            type="submit"
+            className={styles.submit}
+            onClick={handleSubmit}
+          >
             Unwrap
           </button>
         </div>
-      </form>
+      </div>
       <div className={styles.result}>
         <div
           className={classNames(styles.wrapper, {
@@ -146,9 +164,7 @@ const Converter = () => {
                 <button
                   className={styles.actionButton}
                   onClick={async () => {
-                    // await navigator.share({
-                    //   text: data.content.,
-                    // });
+                    await navigator.share({ text: data.content.plain });
                   }}
                 >
                   <Icon glyph={SvgShare} className={styles.actionIcon} />
