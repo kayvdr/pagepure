@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import { useNotification } from "~/context/NotificationContext";
 import styles from "./Converter.module.css";
 import SvgCopy from "./icons/Copy";
 import SvgLink from "./icons/Link";
@@ -32,6 +33,7 @@ const isURL = (url: string) => {
 };
 
 const Converter = () => {
+  const { addNotification } = useNotification();
   const [value, setValue] = useState("");
   const [data, setData] = useState<Data | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
@@ -154,9 +156,10 @@ const Converter = () => {
               <div className={styles.action}>
                 <button
                   className={styles.actionButton}
-                  onClick={async () =>
-                    await navigator.clipboard.writeText(data.content.plain)
-                  }
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(data.content.plain);
+                    addNotification("Copied to clipboard");
+                  }}
                 >
                   <Icon glyph={SvgCopy} className={styles.actionIcon} />
                   Copy
@@ -170,7 +173,13 @@ const Converter = () => {
                   <Icon glyph={SvgShare} className={styles.actionIcon} />
                   Share
                 </button>
-                <button className={styles.actionButton}>
+                <button
+                  className={styles.actionButton}
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(location.href);
+                    addNotification("Copied to clipboard");
+                  }}
+                >
                   <Icon glyph={SvgLink} className={styles.actionIcon} />
                   Link
                 </button>

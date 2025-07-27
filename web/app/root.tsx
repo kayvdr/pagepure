@@ -46,6 +46,8 @@ export const links: LinksFunction = () => [
   },
 ];
 
+import Notifications from "./components/ui/Notifications";
+import { NotificationProvider } from "./context/NotificationContext";
 import "/app/styles/global.css";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => (
@@ -57,7 +59,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
       <Links />
     </head>
     <body>
-      {children}
+      <NotificationProvider>
+        <Notifications />
+        {children}
+      </NotificationProvider>
       <ScrollRestoration />
       <Scripts />
     </body>
