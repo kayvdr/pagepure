@@ -7,6 +7,14 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-direction: column;
+  gap: 2em;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    flex-direction: row;
+  }
 }
 
 .logo {
