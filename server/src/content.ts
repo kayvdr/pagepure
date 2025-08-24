@@ -27,34 +27,38 @@ export const extractContent = async (url: string) => {
 
   const { document: contentDoc } = parseHTML(root);
 
-  // Tags entfernen
+  const KlassesAndIds = [
+    "footer",
+    "ads",
+    "banner",
+    "popup",
+    "cookie",
+    "newsletter",
+    "breadcrumb",
+    "navigation",
+    "menu",
+    "hidden",
+  ];
+
   const forbidden = [
-    // Tags
+    "head",
     "script",
+    "link",
     "style",
     "noscript",
     "iframe",
-    "footer",
     "nav",
+    "footer",
     "form",
+    "input",
     "svg",
-    "link",
     "img",
-    "head",
-    // Exakte Klassen
-    ".ad",
-    ".ads",
-    ".banner",
-    ".popup",
-    ".sponsored",
-    ".cookie-notice",
-    ".newsletter",
-    ".sidebar",
-    // Klassen mit Prefix
-    '[class^="sidebar"]',
-    '[class^="ad"]',
-    '[class^="banner"]',
-    '[class^="popup"]',
+    "video",
+    "progress",
+    ...KlassesAndIds.flatMap((item) => [
+      `[class*="${item}"]`,
+      `[id*="${item}"]`,
+    ]),
   ];
 
   forbidden.forEach((tag) => {
@@ -67,7 +71,9 @@ export const extractContent = async (url: string) => {
   // Entferne alle Tags, deren Name eines der Keywords enthält
   contentDoc.querySelectorAll("*").forEach((el) => {
     const tagName = el.tagName.toLowerCase();
-    if (forbiddenTagKeywords.some((keyword) => tagName.includes(keyword))) {
+    if (
+      forbiddenTagKeywords.some((keyword) => tagName.includes(`${keyword}-`))
+    ) {
       el.remove();
     }
   });
