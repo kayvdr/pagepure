@@ -63,3 +63,7 @@ button {
   padding: 0;
   background: transparent;
 }
+
+table {
+  text-align: left;
+}
