@@ -61,7 +61,7 @@ const Footer = () => (
       </div>
       <p className={styles.copyright}>
         &copy; 2025 Pagepure ltd. All rights reserved.{" "}
-        <Link to="/terms" className={styles.copyrightLink}>
+        <Link to="/terms-of-service" className={styles.copyrightLink}>
           Terms of Use
         </Link>{" "}
         <Link to="/privacy" className={styles.copyrightLink}>
